@@ -1,12 +1,4 @@
-export {Logo} from "./Logo/Logo"
-export {Hero} from "./Hero/Hero"
-export {About} from "./About/About"
-export {Form} from "./Form/Form"
-export {Contact} from "./Contact/Contact"
-export {HorizontalScroll} from "./HorizontalScroll/HorizontalScroll"
-export {Brain3d} from "./Brain3d/Brain3d"
-export {CheckboxComponent} from "./CheckboxComponent/CheckboxComponent"
-export {SubmitButton} from "./AnimatedSubmitButton"
-
-export {Preloader} from "./Preloader/Preloader"
-export {SectionBottomFader} from "./SectionBottomFader/SectionBottomFader"
+export {Logo} from './Logo/Logo';
+export {Brain3d} from './Brain3d/Brain3d';
+export {QuoteCard} from './QuoteCard/QuoteCard';
+export {Preloader} from './Preloader/Preloader';

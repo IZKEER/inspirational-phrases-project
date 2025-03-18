@@ -1,14 +1,12 @@
-@import "../../styles/breakpoints";
-@import "../../styles/unit-conversion";
-@import "../../styles/variables";
+@import '../../styles/breakpoints';
+@import '../../styles/unit-conversion';
+@import '../../styles/variables';
 
 .model-wrapper {
-	height: 80vh; // or any height you prefer
+	align-items: center;
+	display: flex;
+	height: 40vh; // or any height you prefer
+	justify-content: center;
 	position: relative;
 	width: 100%;
 }
-
-// canvas {
-// 	height: 100% !important;
-// 	width: 100% !important;
-// }

@@ -1,93 +1,97 @@
-import {useRef} from "react"
-import gsap from "gsap"
-import {useGSAP} from "@gsap/react"
-import classNames from "classnames/bind"
+import React, {useState, useEffect} from 'react';
+import {SectionContainer} from '../SectionContainer';
 
-import "./Preloader.module.scss"
-import styles from "./Preloader.module.scss"
-let cx = classNames.bind(styles)
-
-const Preloader = ({onFinish}: {onFinish: () => void}) => {
-	const containerRef = useRef<HTMLDivElement>(null)
-	const textRef = useRef<HTMLDivElement>(null)
-	const beamRef = useRef<HTMLDivElement>(null)
-
-	useGSAP(() => {
-		if (containerRef.current && textRef.current && beamRef.current) {
-			const timeline = gsap.timeline({
-				onComplete: onFinish,
-			})
-
-			// Reset initial positions
-			gsap.set(beamRef.current, {left: "-100%"})
-			gsap.set(textRef.current, {
-				WebkitMaskPosition: "-40% 0",
-				maskPosition: "-40% 0",
-			})
-
-			// Animate the beam and mask position
-			timeline
-				.to([beamRef.current], {
-					left: "200%",
-					duration: 0,
-					ease: "back.in(0)",
-				})
-				.to(
-					textRef.current,
-					{
-						WebkitMaskPosition: "200% 0",
-						maskPosition: "150% 0",
-						duration: 5,
-						ease: "back.in(0)",
-					},
-					0
-				) // Start at the same time as beam animation
-				// Right to left reveal
-				.set(textRef.current, {
-					WebkitMaskImage:
-						"linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%)",
-					maskImage:
-						"linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%)",
-					WebkitMaskPosition: "50% 100%",
-					maskPosition: "50% 100%",
-					WebkitMaskSize: "0% 100%",
-					maskSize: "0% 100%",
-				})
-				.to(textRef.current, {
-					WebkitMaskSize: "100% 100%",
-					maskSize: "100% 100%",
-					WebkitMaskImage: "linear-gradient(90deg, white 0%, white 100%)",
-					maskImage: "linear-gradient(90deg, white 0%, white 100%)",
-					ease: "back.in(0)",
-					duration: 0.5,
-				})
-				// Add a pause
-				.to({}, {duration: 1.5})
-				// Then fade out
-				.to(containerRef.current, {
-					opacity: 0,
-					duration: 1,
-				})
-
-			return () => timeline.kill()
-		}
-	}, [onFinish])
-
-	return (
-		<div
-			ref={containerRef}
-			className={cx("preloader")}>
-			<div
-				ref={textRef}
-				className={cx("preloader__text")}>
-				Marcelo Santos
-				<div
-					ref={beamRef}
-					className={cx("preloader__beam")}
-				/>
-			</div>
-		</div>
-	)
+interface SimplePreloaderProps {
+	onFinish: () => void;
+	text?: string;
 }
 
-export {Preloader}
+const Preloader: React.FC<SimplePreloaderProps> = ({onFinish, text = 'Nobody cares, work harder'}) => {
+	const [opacity, setOpacity] = useState(1);
+	const [displayText, setDisplayText] = useState('');
+	const [currentIndex, setCurrentIndex] = useState(0);
+
+	// Typing effect
+	useEffect(() => {
+		if (currentIndex < text.length) {
+			const typingTimer = setTimeout(() => {
+				setDisplayText((prev) => prev + text[currentIndex]);
+				setCurrentIndex((prevIndex) => prevIndex + 1);
+			}, 100); // Adjust speed of typing here
+
+			return () => clearTimeout(typingTimer);
+		}
+	}, [currentIndex, text]);
+
+	// Fade out effect after typing is done
+	useEffect(() => {
+		if (currentIndex === text.length) {
+			// Add a slight delay after typing completes before fading out
+			const fadeTimer = setTimeout(() => {
+				// Start fade out
+				setOpacity(0);
+
+				// Call onFinish when animation completes
+				setTimeout(() => {
+					onFinish();
+				}, 1000);
+			}, 800);
+
+			return () => clearTimeout(fadeTimer);
+		}
+	}, [currentIndex, text, onFinish]);
+
+	return (
+		<>
+			<SectionContainer size="fluid">
+				<div
+					style={{
+						position: 'fixed',
+						top: 0,
+						padding: 80,
+						left: 0,
+						width: '100%',
+						height: '100%',
+						fontFamily: 'Posterama',
+						display: 'flex',
+						lineHeight: 1.5,
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center',
+						background: 'linear-gradient(5deg, rgb(2, 0, 40) 0%, rgb(21, 0, 35) 100%);',
+						opacity: opacity,
+						transition: 'opacity 1s ease',
+						zIndex: 9999,
+					}}>
+					<div
+						style={{
+							fontSize: '1.5rem',
+							fontWeight: 300,
+							color: '#adb8cc',
+							opacity: 0.8,
+							height: '2rem',
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}>
+						{displayText}
+					</div>
+
+					<style jsx>{`
+						@keyframes blink-caret {
+							from,
+							to {
+								border-color: transparent;
+							}
+							50% {
+								border-color: #333;
+							}
+						}
+					`}</style>
+				</div>
+			</SectionContainer>
+		</>
+	);
+};
+
+export {Preloader};

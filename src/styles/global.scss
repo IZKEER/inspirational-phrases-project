@@ -6,46 +6,40 @@ Global
 Base
 ========================================================================== */
 
-@import "./base";
+@import './base';
 /* ==========================================================================
 fonts
 ========================================================================== */
-@import "./fonts";
+@import './fonts';
 
 /* ==========================================================================
 converter
 ========================================================================== */
 
-@import "./unit-conversion";
+@import './unit-conversion';
 
 /* ==========================================================================
 variables
 ========================================================================== */
 
-@import "./variables";
+@import './variables';
 
 /* ==========================================================================
 CSS
 ========================================================================== */
 
-@import "./css-variables";
+@import './css-variables';
 
 /* ==========================================================================
 breakpoints
 ========================================================================== */
 
-@import "./breakpoints";
+@import './breakpoints';
 
 /* ==========================================================================
 components
 ========================================================================== */
 
-@import "../components/Hero/Hero.module.scss";
-@import "../components/Logo/Logo.module.scss";
-@import "../components/SectionContainer/SectionContainer.module.scss";
-@import "../components/About/About.module.scss";
-@import "../components/Contact/Contact.module.scss";
-@import "../components/HorizontalScroll/HorizontalScroll.module.scss";
-@import "../components/Preloader/Preloader.module.scss";
-@import "../components/CheckboxComponent/Checkbox.module.scss";
-@import "../components/ConversationalForm//ConversationalForm.module.scss";
+@import '../components/Logo/Logo.module.scss';
+@import '../components/Preloader/Preloader.module.scss';
+@import '../components/SectionContainer/SectionContainer.module.scss';

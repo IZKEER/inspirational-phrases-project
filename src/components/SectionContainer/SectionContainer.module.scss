@@ -1,11 +1,15 @@
-@import "@/styles/breakpoints";
+@import '@/styles/breakpoints';
 
 .section-container {
-	margin-left: auto;
-	margin-right: auto;
+	align-items: center;
+	display: flex;
+	height: 100dvh;
+	justify-content: center;
+
 	padding: var(--grid-unit-80);
 	padding-left: var(--grid-unit-40);
 	padding-right: var(--grid-unit-40);
+	width: 100%;
 
 	@media (max-width: $breakpoint-tablet) {
 		padding: var(--grid-unit-40);

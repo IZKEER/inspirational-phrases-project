@@ -1,0 +1,50 @@
+// QuoteCard.module.scss
+@import '../../styles/breakpoints';
+
+.quote-card {
+	align-items: center;
+	background: linear-gradient(5deg, rgb(2, 0, 40) 0%, rgb(21, 0, 35) 100%);
+	border-radius: 0.75rem;
+	box-shadow: 0 4px 6px rgba(113, 103, 103, 0.1);
+	display: flex;
+	justify-content: center;
+	margin: 1rem auto;
+	max-width: 100%;
+	overflow: hidden;
+
+	@media (max-width: $breakpoint-tablet) {
+		height: 95dvh;
+		max-width: 100%;
+	}
+}
+
+.card-content {
+	padding: var(--grid-unit-40);
+}
+
+.image-container {
+	display: flex;
+	justify-content: center;
+}
+
+.title {
+	color: #cd6300;
+	font-size: 0.875rem;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	margin-bottom: 0.25rem;
+	text-transform: uppercase;
+}
+
+.content {
+	color: #adb8cc; // gray-500
+	padding: var(--grid-unit-16) 0 var(--grid-unit-24) 0;
+}
+
+.author {
+	color: #52555b;
+	font-size: 0.875rem;
+	font-weight: 500;
+
+	text-align: right;
+}
