@@ -16,7 +16,7 @@ export default function Home() {
 				<QuoteCard
 					title="You can."
 					content="unbothered. moisturized. happy. in your attic. I have a gun. focused."
-					author="Matsuba"
+					author="Caruma"
 				/>
 			</SectionContainer>
 		</>
