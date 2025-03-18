@@ -1,0 +1,67 @@
+@import "../../styles/breakpoints";
+@import "../../styles/unit-conversion";
+@import "../../styles/variables";
+
+.logo-wrapper {
+	border: 2px solid red;
+	display: inline-block;
+
+	a {
+		color: $color-secondary;
+		&:active {
+			color: $background-gradient;
+		}
+	}
+
+	.logo {
+		font-size: rem(60px);
+		font-weight: 700;
+		min-width: rem(70px);
+		padding: rem(0px) rem(24px) rem(0px) rem(0px);
+		position: relative;
+
+		@media (max-width: $breakpoint-tablet) {
+			font-size: rem(24px);
+			min-width: rem(50px);
+			padding-right: rem(12px);
+		}
+
+		&::before {
+			background: $background-gradient;
+			border: 2px solid transparent;
+			bottom: rem(45px);
+			content: "";
+			height: rem(10px);
+			position: absolute;
+			right: rem(0px);
+			width: rem(10px);
+		}
+
+		&::after {
+			background: $color-secondary;
+			border: 2px solid $color-secondary;
+			bottom: rem(25px);
+			content: "";
+			height: rem(10px);
+			position: absolute;
+			right: 0;
+			width: rem(10px);
+		}
+
+		@media (max-width: $breakpoint-tablet) {
+			&::before,
+			&::after {
+				height: rem(4px);
+				width: rem(4px);
+			}
+
+			&::before {
+				top: 10px;
+			}
+
+			&::after {
+				bottom: 8px;
+			}
+		}
+	}
+}

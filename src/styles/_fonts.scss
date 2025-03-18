@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+@font-face {
+	font-family: "Posterama";
+	font-style: normal;
+	font-weight: normal;
+	src: url("../../src/pages/fonts/Posterama.ttf");
+}
+
+@import "./unit-conversion";
+
+@import "./breakpoints";
+h1 {
+	font-family: "Posterama";
+	font-size: rem(64px);
+}
+
+h2 {
+	font-family: "Posterama";
+	font-size: rem(48px);
+}
+
+h3 {
+	font-size: rem(24px);
+}
+
+h1,
+h2 {
+	margin: rem(32px) 0px;
+}
+
+h3 {
+	margin: rem(24px) 0px;
+}
+
+p {
+	font-size: rem(18px);
+	line-height: 1.125;
+}
+
+@media (max-width: $breakpoint-tablet) {
+	h1 {
+		font-size: rem(32px);
+	}
+
+	h2 {
+		font-size: rem(24px);
+	}
+
+	h3 {
+		font-size: rem(20px);
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin: rem(16px) 0px;
+	}
+}

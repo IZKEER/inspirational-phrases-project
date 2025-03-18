@@ -1,0 +1,140 @@
+@import "./variables";
+@import "./unit-conversion";
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+	padding: 0;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+a:visited,
+a:hover,
+a:link,
+a:active {
+	background: transparent;
+	border: 0;
+	line-height: 1;
+	list-style-type: none;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	text-decoration: none;
+	vertical-align: baseline;
+}
+
+html {
+	height: -webkit-fill-available;
+}
+
+body {
+	background-color: $color-primary;
+	color: $color-secondary;
+	font-family: "Poppins", sans-serif;
+	font-size: 18px;
+	line-height: rem(24px);
+	min-height: webkit-fill-available;
+	overflow-x: hidden;
+}
+
+.readable-text {
+	display: block;
+	letter-spacing: rem(0.1px);
+	line-height: rem(24px);
+	max-width: 75ch;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: $color-secondary-darker;
+	opacity: 0.5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: $color-secondary;
+	background: #ebe8e8;
+	border-radius: 16px;
+	width: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: $color-secondary-darkest;
+}
+
+.reveal-text {
+	opacity: 1;
+	visibility: visible;
+}
+
+.reveal-text span {
+	overflow-wrap: normal;
+	white-space: pre;
+	word-break: keep-all;
+}

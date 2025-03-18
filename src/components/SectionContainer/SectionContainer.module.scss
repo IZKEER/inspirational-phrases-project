@@ -1,0 +1,36 @@
+@import "@/styles/breakpoints";
+
+.section-container {
+	margin-left: auto;
+	margin-right: auto;
+	padding: var(--grid-unit-80);
+	padding-left: var(--grid-unit-40);
+	padding-right: var(--grid-unit-40);
+
+	@media (max-width: $breakpoint-tablet) {
+		padding: var(--grid-unit-40);
+		padding-left: var(--grid-unit-16);
+		padding-right: var(--grid-unit-16);
+	}
+
+	&.xs {
+		max-width: var(--container--xsm-max-width);
+	}
+
+	&.sm {
+		max-width: var(--container--sm-max-width);
+	}
+
+	&.md {
+		max-width: var(--container--md-max-width);
+	}
+
+	&.lg {
+		max-width: var(--container--max-width);
+	}
+
+	&.fluid {
+		max-width: 100%;
+		overflow: hidden;
+	}
+}

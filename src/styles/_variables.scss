@@ -1,0 +1,75 @@
+// this file contains the scss variables
+
+// /* Typography - Weight */
+$font-light: 300 !default;
+$font-regular: 400 !default;
+$font-semi-bold: 700 !default;
+$font-bold: 900 !default;
+
+$colors: "primary", "secondary";
+
+$color-primary: #000 !default;
+$color-primary-lightest: lighten($color-primary, 40%);
+$color-primary-lighter: lighten($color-primary, 25%);
+$color-primary-light: lighten($color-primary, 15%);
+$color-primary-dark: darken($color-primary, 5%);
+$color-primary-darker: darken($color-primary, 10%);
+$color-primary-darkest: darken($color-primary, 15%);
+$color-primary-hover: $color-primary-light;
+$color-primary-selected: rgba(112, 48, 160, 0.12);
+$color-secondary: #b7ab98 !default;
+$color-secondary-lightest: lighten($color-secondary, 40%);
+$color-secondary-lighter: lighten($color-secondary, 25%);
+$color-secondary-light: lighten($color-secondary, 15%);
+$color-secondary-dark: darken($color-secondary, 5%);
+$color-secondary-darker: darken($color-secondary, 10%);
+$color-secondary-darkest: darken($color-secondary, 15%);
+$color-secondary-hover: $color-secondary-light;
+
+$background-gradient: linear-gradient(
+	180deg,
+	rgba(190, 43, 36, 1) 100%,
+	rgba(239, 87, 38, 1) 50%
+);
+
+$shadow-none: none !default;
+$shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.1) !default;
+$shadow-s: 0 2px 4px rgba(0, 0, 0, 0.1) !default;
+$shadow-m: 0 4px 6px rgba(0, 0, 0, 0.1) !default;
+$shadow-l: 0 6px 8px rgba(0, 0, 0, 0.1) !default;
+$shadow-xl: 0 8px 10px rgba(0, 0, 0, 0.1) !default;
+
+$color-background-body: #f3f6f8 !default;
+$color-background-login: #ffffff !default;
+$header-color: #ffffff !default;
+$header-size: 56px !default;
+$header-size-content: 48px !default;
+$side-menu-color: #ffffff !default;
+$side-menu-size: 300px !default;
+$menu-collapse-width: 76px !default;
+$bottom-bar-size: 56px !default;
+$sidebar-width: 450px !default;
+
+// opacities
+
+$bg-low-opacity: rgba(0, 0, 0, 0.05);
+$bg-medium-opacity: rgba(0, 0, 0, 0.15);
+$bg-high-opacity: rgba(0, 0, 0, 0.25);
+
+$low-opacity: 0.6;
+$medium-opacity: 0.4;
+$high-opacity: 0.3;
+
+// /* btn size */
+$btn-height-small: 32px;
+$btn-height: 40px;
+$btn-height-large: 48px;
+
+//variables for tablet and phone mixins
+
+$tablet-breakpoint: 768px;
+$phone-breakpoint: 480px;
+
+//variables for letter spacing
+
+$letter-spacing-4: 4px;

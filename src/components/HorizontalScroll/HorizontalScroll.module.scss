@@ -1,0 +1,18 @@
+@import "../../styles/breakpoints";
+@import "../../styles/unit-conversion";
+@import "../../styles/variables";
+
+.horizontal {
+	&-section {
+		height: 100dvh;
+		overflow: hidden;
+		width: 100%;
+	}
+
+	&-container {
+		align-items: center;
+		display: flex;
+		gap: rem(96px);
+		height: 100vh;
+	}
+}
