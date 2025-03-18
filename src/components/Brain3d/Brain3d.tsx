@@ -15,7 +15,8 @@ type Brain3dProps = {
 } & HTMLAttributes<HTMLDivElement>;
 
 function Model() {
-	const {scene} = useGLTF('/brain_hologram/scene.gltf');
+	// Add the repository name to the path
+	const {scene} = useGLTF('/inspirational-phrases-project/brain_hologram/scene.gltf');
 	return <primitive object={scene} scale={3} position={[0, 0, 0]}></primitive>;
 }
 
