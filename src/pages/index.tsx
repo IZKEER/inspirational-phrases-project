@@ -15,8 +15,8 @@ export default function Home() {
 			<SectionContainer size="fluid">
 				<QuoteCard
 					title="You can."
-					content="unbothered. moisturized. happy. in your attic. I have a gun. focused."
-					author="Matsuba"
+					content="Unbothered. Moisturized. Happy. In your attic. I have a gun. Focused."
+					author="Caruma"
 				/>
 			</SectionContainer>
 		</>
