@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import {Canvas} from '@react-three/fiber';
 import {useGLTF, OrbitControls, Environment} from '@react-three/drei';
 
-import {SectionContainer} from '../SectionContainer';
 import styles from './Brain.module.scss';
 
 let cx = classNames.bind(styles);
@@ -15,8 +14,9 @@ type Brain3dProps = {
 } & HTMLAttributes<HTMLDivElement>;
 
 function Model() {
-	// Add the repository name to the path
-	const {scene} = useGLTF('/inspirational-phrases-project/brain_hologram/scene.gltf');
+	const basePath = process.env.NODE_ENV === 'production' ? '/inspirational-phrases-project' : '';
+
+	const {scene} = useGLTF(`${basePath}/brain_hologram/scene.gltf`);
 	return <primitive object={scene} scale={3} position={[0, 0, 0]}></primitive>;
 }
 
