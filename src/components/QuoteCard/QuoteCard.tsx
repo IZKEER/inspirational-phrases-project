@@ -84,9 +84,6 @@ const QuoteCard = ({title, initialContent, initialAuthor, imageSrc, className}: 
 				// Use the seed to deterministically select a quote for today
 				const quoteIndex = seed % data.results.length;
 				const dailyQuote = data.results[quoteIndex];
-
-				console.log(`Today's quote (${quoteIndex}/${data.results.length}):`, dailyQuote);
-
 				setQuoteContent(dailyQuote.content);
 				setQuoteAuthor(dailyQuote.author);
 			} else {
