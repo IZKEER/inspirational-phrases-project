@@ -65,14 +65,12 @@ const QuoteCard = ({title, initialContent, initialAuthor, imageSrc, className}: 
 			const todayString = getTodayString();
 			const seed = generateSeed(todayString);
 
-			console.log(`Fetching daily quote for ${todayString}, seed: ${seed}`);
-
 			// Store the API URL
 			const baseApiUrl = 'https://api.quotable.io/quotes';
 			const tags = 'failure|inspirational|motivational';
 
 			// Fetch a list of quotes instead of just one random quote
-			const response = await fetch(`${baseApiUrl}?tags=${tags}&limit=50`);
+			const response = await fetch(`${baseApiUrl}?tags=${tags}&limit=5`);
 
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
