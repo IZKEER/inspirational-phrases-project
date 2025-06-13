@@ -7,7 +7,8 @@ import type {AppProps} from 'next/app';
 import {Preloader} from '@/components/Preloader/Preloader';
 
 export default function App({Component, pageProps}: AppProps) {
-	const [loading, setLoading] = useState(true);
+	// Temporarily disable preloader for debugging
+	const [loading, setLoading] = useState(false); // Changed from true to false
 	const componentRef = useRef<HTMLDivElement>(null);
 
 	// Add effect to handle scroll restoration
@@ -46,7 +47,7 @@ export default function App({Component, pageProps}: AppProps) {
 			<div
 				ref={componentRef}
 				style={{
-					opacity: 0,
+					opacity: 1, // Changed from 0 to 1 - make content visible immediately
 					transition: 'opacity 1s ease-in-out',
 				}}>
 				<Component {...pageProps} />
