@@ -1,19 +1,26 @@
 /** @type {import('next').NextConfig} */
-const repo = 'inspirational-phrases-project'; // Replace with your actual repository name
+const repo = 'inspirational-phrases-project';
 
 const nextConfig = {
 	reactStrictMode: true,
-	output: 'export',
-	basePath: process.env.NODE_ENV === 'production' ? `/${repo}` : '',
-	assetPrefix: process.env.NODE_ENV === 'production' ? `/${repo}/` : '',
+	
+	// Only use static export for GitHub Pages, not Vercel
+	// Vercel can handle API routes, so we don't want static export there
+	...(process.env.NODE_ENV === 'production' && 
+		!process.env.VERCEL && {
+		output: 'export',
+		basePath: `/${repo}`,
+		assetPrefix: `/${repo}/`,
+		trailingSlash: true,
+	}),
+	
 	sassOptions: {
 		includePaths: ['node_modules'],
 		modules: true,
 	},
 	images: {
-		unoptimized: true, // Required for static export
+		unoptimized: true,
 	},
-	trailingSlash: true, // Helps with GitHub Pages routing
 };
 
 export default nextConfig;

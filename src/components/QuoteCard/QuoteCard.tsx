@@ -6,6 +6,13 @@ import {Brain3d} from '../Brain3d';
 
 let cx = classNames.bind(styles);
 
+type Quote = {
+  content: string;
+  author: string;
+  tags: string[];
+  _id: string;
+};
+
 type QuoteCardProps = {
 	title?: string;
 	initialContent?: string;
@@ -13,6 +20,70 @@ type QuoteCardProps = {
 	imageSrc?: string;
 	className?: string;
 } & HTMLAttributes<HTMLDivElement>;
+
+// Local fallback quotes - these will always work
+const FALLBACK_QUOTES: Quote[] = [
+  {
+    content: "The only way to do great work is to love what you do.",
+    author: "Steve Jobs",
+    tags: ["inspirational", "motivational"],
+    _id: "fallback-1"
+  },
+  {
+    content: "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+    author: "Winston Churchill", 
+    tags: ["motivational", "failure"],
+    _id: "fallback-2"
+  },
+  {
+    content: "Don't be afraid to give up the good to go for the great.",
+    author: "John D. Rockefeller",
+    tags: ["inspirational", "motivational"],
+    _id: "fallback-3"
+  },
+  {
+    content: "The way to get started is to quit talking and begin doing.",
+    author: "Walt Disney",
+    tags: ["motivational", "inspirational"],
+    _id: "fallback-4"
+  },
+  {
+    content: "Innovation distinguishes between a leader and a follower.",
+    author: "Steve Jobs",
+    tags: ["inspirational", "motivational"],
+    _id: "fallback-5"
+  },
+  {
+    content: "Don't watch the clock; do what it does. Keep going.",
+    author: "Sam Levenson",
+    tags: ["motivational", "inspirational"],
+    _id: "fallback-6"
+  },
+  {
+    content: "The future belongs to those who believe in the beauty of their dreams.",
+    author: "Eleanor Roosevelt",
+    tags: ["inspirational", "motivational"],
+    _id: "fallback-7"
+  },
+  {
+    content: "It is during our darkest moments that we must focus to see the light.",
+    author: "Aristotle",
+    tags: ["inspirational", "failure"],
+    _id: "fallback-8"
+  },
+  {
+    content: "Success is not how high you have climbed, but how you make a positive difference to the world.",
+    author: "Roy T. Bennett",
+    tags: ["motivational", "inspirational"],
+    _id: "fallback-9"
+  },
+  {
+    content: "Believe you can and you're halfway there.",
+    author: "Theodore Roosevelt",
+    tags: ["motivational", "inspirational"],
+    _id: "fallback-10"
+  }
+];
 
 const QuoteCard = ({title, initialContent, initialAuthor, imageSrc, className}: QuoteCardProps) => {
 	// State to store the quote data
@@ -57,6 +128,17 @@ const QuoteCard = ({title, initialContent, initialAuthor, imageSrc, className}: 
 			.padStart(2, '0')}`;
 	};
 
+	// Function to get quote from local fallback quotes
+	const getLocalQuote = () => {
+		const todayString = getTodayString();
+		const seed = generateSeed(todayString);
+		const quoteIndex = seed % FALLBACK_QUOTES.length;
+		const dailyQuote = FALLBACK_QUOTES[quoteIndex];
+		
+		setQuoteContent(dailyQuote.content);
+		setQuoteAuthor(dailyQuote.author);
+	};
+
 	const fetchDailyQuote = async () => {
 		try {
 			setIsLoading(true);
@@ -65,33 +147,45 @@ const QuoteCard = ({title, initialContent, initialAuthor, imageSrc, className}: 
 			const todayString = getTodayString();
 			const seed = generateSeed(todayString);
 
-			// Store the API URL
-			const baseApiUrl = 'https://api.quotable.io/quotes';
-			const tags = 'failure|inspirational|motivational';
-
-			// Fetch a list of quotes instead of just one random quote
-			const response = await fetch(`${baseApiUrl}?tags=${tags}&limit=5`);
-
-			if (!response.ok) {
-				throw new Error(`HTTP error! Status: ${response.status}`);
-			}
-
-			const data = await response.json();
-
-			if (data.results && data.results.length > 0) {
-				// Use the seed to deterministically select a quote for today
-				const quoteIndex = seed % data.results.length;
-				const dailyQuote = data.results[quoteIndex];
-				setQuoteContent(dailyQuote.content);
-				setQuoteAuthor(dailyQuote.author);
-			} else {
-				throw new Error('No quotes found');
+			// Try our Next.js API route first
+			try {
+				const response = await fetch('/api/quotes?tags=failure|inspirational|motivational&limit=5');
+				
+				if (response.ok) {
+					const data = await response.json();
+					if (data.results && data.results.length > 0) {
+						const quoteIndex = seed % data.results.length;
+						const dailyQuote = data.results[quoteIndex];
+						setQuoteContent(dailyQuote.content);
+						setQuoteAuthor(dailyQuote.author);
+						return; // Success! Exit early
+					}
+				}
+				throw new Error('API route failed');
+			} catch (apiError) {
+				// If API route fails, try external API directly
+				try {
+					const response = await fetch('https://api.quotable.io/quotes?tags=failure|inspirational|motivational&limit=5');
+					if (response.ok) {
+						const data = await response.json();
+						if (data.results && data.results.length > 0) {
+							const quoteIndex = seed % data.results.length;
+							const dailyQuote = data.results[quoteIndex];
+							setQuoteContent(dailyQuote.content);
+							setQuoteAuthor(dailyQuote.author);
+							return; // Success! Exit early
+						}
+					}
+					throw new Error('External API failed');
+				} catch (externalError) {
+					// If both fail, use local quotes silently
+					getLocalQuote();
+				}
 			}
 		} catch (error) {
-			console.error('Error fetching daily quote:', error);
-			// Fallback quote in case of error
-			setQuoteContent('The best preparation for tomorrow is doing your best today.');
-			setQuoteAuthor('H. Jackson Brown Jr.');
+			console.error('Error in fetchDailyQuote:', error);
+			// Final fallback - use local quotes
+			getLocalQuote();
 		} finally {
 			setIsLoading(false);
 		}
@@ -136,7 +230,7 @@ const QuoteCard = ({title, initialContent, initialAuthor, imageSrc, className}: 
 
 				{/* Quote content */}
 				{isLoading ? (
-					<p className={cx('content')}>Loading...</p>
+					<p className={cx('content')}>Loading inspiring thoughts...</p>
 				) : (
 					<>
 						<p className={cx('content')}>"{quoteContent}"</p>
@@ -145,7 +239,6 @@ const QuoteCard = ({title, initialContent, initialAuthor, imageSrc, className}: 
 				)}
 
 				{/* Countdown timer */}
-
 				<div className={cx('countdown')}>New quote in: {countdown}</div>
 			</div>
 		</div>
