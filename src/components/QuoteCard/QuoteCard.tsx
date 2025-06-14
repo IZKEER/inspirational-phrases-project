@@ -247,8 +247,7 @@ const QuoteCard = ({title, initialContent, initialAuthor, imageSrc, className}: 
 					<div className={cx('share-section')}>
 						<ShareButton 
 							quote={{
-								content: quoteContent,
-								author: quoteAuthor
+								content: quoteContent
 							}}
 							className={cx('share-button')}
 						/>
