@@ -60,3 +60,16 @@
 	margin-top: var(--grid-unit-40);
 	text-align: center;
 }
+
+.share-section {
+	display: flex;
+	justify-content: center;
+	margin-top: var(--grid-unit-24);
+	padding-top: var(--grid-unit-24);
+	border-top: 1px solid rgba(173, 184, 204, 0.1);
+}
+
+.share-button {
+	// Any specific overrides for the share button in this context
+	// The component already has its own styling
+}

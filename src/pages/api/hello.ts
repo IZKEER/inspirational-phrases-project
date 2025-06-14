@@ -5,8 +5,9 @@ type Data = {
   name: string;
 };
 
-export const runtime = 'edge';
+// Removed edge runtime for now - using standard Node.js runtime
+// export const runtime = 'edge';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json({ message: 'Hello from Edge Runtime!' });
+export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  res.status(200).json({ name: 'John Doe' });
 }

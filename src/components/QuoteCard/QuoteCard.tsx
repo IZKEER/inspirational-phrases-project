@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 
 import styles from './QuoteCard.module.scss';
 import {Brain3d} from '../Brain3d';
+import {ShareButton} from '../ShareButton';
 
 let cx = classNames.bind(styles);
 
@@ -240,6 +241,19 @@ const QuoteCard = ({title, initialContent, initialAuthor, imageSrc, className}: 
 
 				{/* Countdown timer */}
 				<div className={cx('countdown')}>New quote in: {countdown}</div>
+
+				{/* Share functionality */}
+				{!isLoading && quoteContent && (
+					<div className={cx('share-section')}>
+						<ShareButton 
+							quote={{
+								content: quoteContent,
+								author: quoteAuthor
+							}}
+							className={cx('share-button')}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 	);
